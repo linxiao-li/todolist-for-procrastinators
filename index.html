@@ -3,13 +3,16 @@
     <head>
 
     <!--scripts-->
-    <script src="js/webix.js" type="text/javascript"></script> 
     <script src="js/jquery.min.js" type="text/javascript"></script> 
-    <script src="js/backbone.js" type="text/javascript"></script>
     <script src="js/underscore.js" type="text/javascript"></script> 
+    <script src="js/backbone.js" type="text/javascript"></script>
     <script src="js/Backbone.Localstorage.js" type = "text/javascript"></script>
-    <script src="js/require.js"></script>
-    <script src="js/todo.js" type="text/script"></script>
+    <script src="js/require.js" type = "text/javascript" ></script>
+
+
+    <script src="js/webix.js" type="text/javascript"></script>
+
+   
     
     <!-- styles-->
     <link rel="stylesheet" href="css/touch.css" type="text/css"> 
@@ -34,52 +37,61 @@
     </style>
     </head>
     <body>
-    	<div id="container" style="margin:0px;padding:0px"></div>
-        <script type="text/javascript" charset="utf-8">
-       
+    	<div id="container"></div>
+    	<script>
 
-       var dataSet = [{"todo":"Pick up milk from store"},{"todo":"Make Dr. Appointment"},{"todo":"Pay Water Bill"}]
+		  var grid = new webix.ui({
+		        id:"todoapp",
+		        view:"layout",
+		        responsive:true,
+		        container:"container",
+		        type:{height:"auto"},
+		        css:"card",
+		        rows:[
+		            { view:"template", 
+		              type:"header", template:"Todo List" },
 
+		            {
+		            view:"form", 
+		            css:"card",
+		            elements:[
+		              {margin:5,cols:[
+		                {view:"text",
+		                 label:"add item",
+		                 id:"input",
+		                 minWidth:250},
 
-		grid = new webix.ui({
-			  view:"layout",
-			  responsive:true,
-			  container:"container",
-			  type:{height:"auto"},
-			  css:"card",
-			  rows:[
-			      { view:"template", 
-			        type:"header", template:"Todo List" },
+		                {view:"button",
+		                 id:"addItem",
+		                 value:"add",
+		                 width:150,
+		                 maxWidth:200,
+		                 css:"button"}
+		                ]}
+		            ]
+		            },
 
-			      {
-				    view:"form", 
-				    css:"card",
-				    elements:[
-				      {margin:5,cols:[
-				      	{view:"text",label:"add item",id:"input",minWidth:250},
-				      	{view:"button",value:"add",width:150,maxWidth:200,css:"button"}
-				      	]}
-				    ]
-				    },
+		        {       view:"list",
+		                id:"todoList",
+		                margin:200,
+		                template:"#todo#",
+		                height:400,
+		                css:"card",
 
-				{       view:"list",
-				        margin:200,
-				        template:"#todo#",
-				        height:400,
-				        css:"card",
-				        data:dataSet
-			      },
+		            },
 
-			      {view:"template", 
-			       template:"Total Todos",
-			       height:70,
-			       css:"footer"
-			      }
-			  ]
-			});
+		            {view:"template",
+		             id:"leftTodos",
+		             template:"Total Todos",
+		             height:70,
+		             css:"footer",
+		             lable:""
+		            }
+		        ]
+		      });
 
-			webix.event(window, "resize", function(){ grid.adjust(); });
-        </script>
-
+		      webix.event(window, "resize", function(){ grid.adjust(); });
+    	</script>
+        <script src="js/test.js" type="text/javascript"></script>
     </body>
 </html>
