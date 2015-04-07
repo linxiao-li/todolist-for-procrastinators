@@ -1,9 +1,11 @@
 $(function(){
 /**Here stores the data**/
-var dataSet = [{"todo":"Pick up milk from store"},{"todo":"Make Dr. Appointment"},{"todo":"Pay Water Bill"}];
+
+var dataSet = [];
 
 /*cache the webix elements*/
-var addButton = $$("addItem"),
+var switchButton = $$("switchButton"),
+    addButton = $$("addItem"),
     leftTodos = $$("leftTodos"),
     addInput = $$("input"),// selected with webix native selector in order to use the built in functions
     listView = $$("todoList");
@@ -35,6 +37,8 @@ var addButton = $$("addItem"),
  var List = Backbone.Collection.extend({
 
   model:Item,
+
+
 
   setId:function(){
 
@@ -78,7 +82,12 @@ var Todos = new List(dataSet);
   render: function() {
       Todos.setId();
       listView.sync(Todos);
-      leftTodos.setHTML("<p>Total Todos: " + Todos.models.length + "</p>")
+      if(Todos.models.length>0){
+        leftTodos.setHTML("<p>" + chText.haiyou + Todos.models.length + chText.wancheng + "</p>")
+      }else{
+        leftTodos.setHTML("<p>"+chText.tianjia+"</p>"+"<p>"+chText.shanchu+"</p>"+"<p>"+chText.kangfu+"</p>")
+      }
+      
   
   },
 
@@ -91,6 +100,8 @@ var Todos = new List(dataSet);
       }     
       addInput.setValue("");
       return this      
+
+      
   },
 
   deleteOne:function(id,e,node){
@@ -108,7 +119,13 @@ var Todos = new List(dataSet);
 
 /*select elements and attach events*/
  var addHandler = function(){
-  App.createOne().render()
+  if(Todos.models.length<3){
+    App.createOne().render()
+  }else{
+    leftTodos.setHTML("<p>"+chText.msg+"</p>")
+
+  }
+  
  };
 
  var deleteHandler = function(id,e,node){
@@ -116,9 +133,12 @@ var Todos = new List(dataSet);
  };
 
 
-
 addButton.attachEvent("onItemClick",addHandler);
+switchButton.attachEvent("onItemClick",function(){
+  leftTodos.setHTML("<p>"+chText.tuoyan+"</p>")
+})
 listView.attachEvent("onItemDblClick",deleteHandler);
+
 
 
 

@@ -6,8 +6,6 @@
     <script src="js/jquery.min.js" type="text/javascript"></script> 
     <script src="js/underscore.js" type="text/javascript"></script> 
     <script src="js/backbone.js" type="text/javascript"></script>
-    <script src="js/Backbone.Localstorage.js" type = "text/javascript"></script>
-    <script src="js/require.js" type = "text/javascript" ></script>
 
 
     <script src="js/webix.js" type="text/javascript"></script>
@@ -23,7 +21,7 @@
       .button{
 	      display: inline-block;
 	      position: relative;
-	      width: 120px;
+	      width: 50px;
 	      height: 32px;
 	      line-height: 32px;
 	      border-radius: 2px;
@@ -31,72 +29,99 @@
 	      background-color: #fff;
 	      color: #646464;
       }
+      .switchMode{
+        text-align: center
+
+      }
       .footer{
-      	  text-align: right;
+      	  text-align: center;
+          font-size:40;
       }
     </style>
     </head>
     <body>
-    	<div id="container"></div>
     	<script>
+       chText = {
+        header:"\u62d6\u5ef6\u764c\u0054\u006f\u0064\u006f",
+        msg:"\u5475\u5475\u3002",
+        haiyou:"\u8fd8\u6709",
+        wancheng:"\u4ef6\u4e8b\u60c5\u6ca1\u6709\u5b8c\u6210\u5466\u007e",
+        tianjia:"\u70b9\u51fb\u6309\u94ae\u6dfb\u52a0\u4e8b\u4ef6",
+        shanchu:"\u53cc\u51fb\u5220\u9664\u4e8b\u4ef6",
+        kangfu:"\u795d\u65e9\u65e5\u5eb7\u590d\uff01",
+        zhenchang:"\u5207\u6362\u5230\u6b63\u5e38\u4eba\u6a21\u5f0f",
+        tuoyan:"\u7a0b\u5e8f\u733f\u7684\u62d6\u5ef6\u75c7\u8fd8\u6ca1\u597d\u002e\u002e\u002e"
+       };
 
-		  var grid = new webix.ui({
-		        id:"todoapp",
-		        view:"layout",
-		        responsive:true,
-		        container:"container",
-		        type:"space",
-		        css:"card",
-		        rows:[{responsive:"todoapp",    
-		               type:"space", 
-		               padding:0,
-		               rows:[
-		            { view:"template", 
-		              type:"header", template:"Todo List" },
+       var top = { view:"template",
+                   type: "space"};
 
-		            {
+       var top2 = {view:"template",
+                   type: "header" ,
+               template: chText.header
+
+       };
+
+	     var form = {
 		            view:"form", 
 		            css:"card",
 		            elements:[
 		              {margin:5,cols:[
 		                {view:"text",
-		                 label:"add item",
+		                 //label:"add item",
 		                 id:"input",
-		                 minWidth:250},
+		                 },
 
 		                {view:"button",
-		                 responsive:"input",
 		                 id:"addItem",
-		                 value:"add",
-		                 width:150,
-		                 maxWidth:200,
+		                 value:"+",
+		                 width:80,
 		                 css:"button"}
 		                ]}
 		            ]
-		            },
+		            };
 
-		        {       view:"list",
+       var list = { view:"list",
 		                id:"todoList",
-		                margin:200,
 		                template:"#todo#",
-		                height:400,
 		                css:"card",
+                    minHight:250
 
-		            },
+		            };
+       var button = {view:"button",
+                     id:"switchButton",
+                     value:chText.zhenchang,
+                     css:"switchMode",
+                     margin:60
 
-		            {view:"template",
+                    }
+       var footer = {view:"template",
 		             id:"leftTodos",
 		             template:"Total Todos",
-		             height:70,
 		             css:"footer",
-		             lable:""
-		            }
-		        ]
-		            }]
+                
+		            };
 
-		      });
+    webix.ui.fullScreen();
+    webix.ui({
+        rows:[
+            top,
+            top2,
+            form,
+            list,
+            footer,
+            button
+        ]
+       });
 
-		      webix.event(window, "resize", function(){ grid.adjust()});
+    $(".webix_spacer").remove();
+    $(".webix_list").css("height","270px");
+    $(".switchMode > div > button").css({
+      "background-color":"#3D6099",
+      "width":"400px",
+      "border":"1px,solid,#3D6099"
+    })
+
     	</script>
         <script src="js/test.js" type="text/javascript"></script>
     </body>
