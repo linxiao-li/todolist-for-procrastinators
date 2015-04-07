@@ -86,14 +86,13 @@
 		                id:"todoList",
 		                template:"#todo#",
 		                css:"card",
-                    minHight:250
+                    minHight:200
 
 		            };
        var button = {view:"button",
                      id:"switchButton",
                      value:chText.zhenchang,
                      css:"switchMode",
-                     margin:60
 
                     }
        var footer = {view:"template",
@@ -116,10 +115,9 @@
        });
 
     $(".webix_spacer").remove();
-    $(".webix_list").css("height","270px");
+    $(".webix_list").css("height","200px");
     $(".switchMode > div > button").css({
       "background-color":"#3D6099",
-      "width":"400px",
       "border":"1px,solid,#3D6099"
     })
 
