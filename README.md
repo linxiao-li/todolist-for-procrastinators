@@ -5,5 +5,5 @@ By limiting the number fo items, it relieves users' anxiety seeing a pile of unf
 
 Click add Button to add Item
 
-Doubleclick item to remove it
+Doubleclick an item to remove
 
